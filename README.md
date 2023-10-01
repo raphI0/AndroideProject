@@ -7,6 +7,6 @@ Nom d'équipe/entreprise/studio original
 
 ##Nos missions
 
-##Notre équipe
-3. Identification de chaque membre de l'équipe
-4. Courte biographie de chaque membre en incluant l'expertise et les intérêts pertinents au projet
+## Notre équipe
+- Identification de chaque membre de l'équipe
+- Courte biographie de chaque membre en incluant l'expertise et les intérêts pertinents au projet
