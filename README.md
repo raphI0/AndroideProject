@@ -1,11 +1,8 @@
 # AndroideProject
-Dans le cadre de cours Programmation de plateformes mobiles (8INF865), nous sommes une équipe de 3 étudiants, qui souhaite dévélopper l'application mobile sur les fonctionnalités liées à la musique. Notre objectif est de concevoir une application mobile basé sur Android Studio avec des fonctionnalités qu'on souhaite mettre en avance.
+Dans le cadre de cours Programmation de plateformes mobiles (8INF865), nous sommes une équipe de 3 étudiants, qui souhaitent dévélopper l'application mobile avec les fonctionnalités liées à la musique. Notre objectif est de concevoir une application mobile basé sur Android Studio en dévéloppant des fonctionnalités qu'on souhaite mettre en avance.
 
-Nom d'équipe/entreprise/studio original
-## Notre philosophie
+## Ressources
 
-## Nos missions
+Allez voir la page wikia pour connaître davantage sur notre projet.
 
-## Notre équipe
-- Identification de chaque membre de l'équipe
-- Courte biographie de chaque membre en incluant l'expertise et les intérêts pertinents au projet
+
