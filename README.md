@@ -5,7 +5,7 @@ App mobile développé sous androïde studio -  8INF857
 Nom d'équipe/entreprise/studio original
 ## Notre philosophie
 
-##Nos missions
+## Nos missions
 
 ## Notre équipe
 - Identification de chaque membre de l'équipe
