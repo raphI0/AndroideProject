@@ -1,5 +1,5 @@
 # AndroideProject
-App mobile développé sous androïde studio -  8INF857
+Dans le cadre de cours Programmation de plateformes mobiles développé sous Android Studio - 8INF865
 
 
 Nom d'équipe/entreprise/studio original
