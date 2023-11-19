@@ -268,7 +268,7 @@ fun AlarmCard(alarm: Alarm, onAlarmCheckedChange: (Boolean) -> Unit) {
             onAlarmCheckedChange(it)
         })
     }
-    //tdzadadzazdzadadzadadzadadz
+    //tdzadadzazdzadadzadadzadaddzadazz
 }
 
 
