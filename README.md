@@ -10,3 +10,7 @@ Notre projet vise à créer une application mobile qui offre des fonctionnalité
 Pour en savoir plus sur notre projet, consultez notre [page Wikia]([lien_vers_la_page_wikia](https://github.com/raphI0/AndroideProject/wiki)) dédiée. Vous y trouverez des informations complémentaires, des guides d'utilisation, notre présentation et bien plus encore.
 
 N'hésitez pas à explorer notre Wikia pour obtenir des détails approfondis sur notre projet et pour rester à jour avec les dernières informations.
+
+## Ouvrir le projet
+
+Ouvrir le sous dossier BasicClock, présent dans le dossier projet "AndroideProject", en tant que projet androïde, sous androïde studio (ou tout autre IDE acceptant ce type de projets).
