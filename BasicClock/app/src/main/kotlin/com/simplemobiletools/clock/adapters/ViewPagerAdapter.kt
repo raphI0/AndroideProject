@@ -6,8 +6,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.simplemobiletools.clock.fragments.AlarmFragment
 import com.simplemobiletools.clock.fragments.ClockFragment
-import com.simplemobiletools.clock.fragments.StopwatchFragment
-import com.simplemobiletools.clock.fragments.TimerFragment
 import com.simplemobiletools.clock.helpers.*
 import com.simplemobiletools.commons.models.AlarmSound
 
@@ -36,8 +34,6 @@ class ViewPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
     private fun getFragment(position: Int) = when (position) {
         0 -> ClockFragment()
         1 -> AlarmFragment()
-        2 -> StopwatchFragment()
-        3 -> TimerFragment()
         else -> throw RuntimeException("Trying to fetch unknown fragment id $position")
     }
 
@@ -53,15 +49,4 @@ class ViewPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         (fragments[TAB_ALARM] as? AlarmFragment)?.updateAlarmSound(alarmSound)
     }
 
-    fun updateTimerTabAlarmSound(alarmSound: AlarmSound) {
-        (fragments[TAB_TIMER] as? TimerFragment)?.updateAlarmSound(alarmSound)
-    }
-
-    fun updateTimerPosition(timerId: Int) {
-        (fragments[TAB_TIMER] as? TimerFragment)?.updatePosition(timerId)
-    }
-
-    fun startStopWatch() {
-        (fragments[TAB_STOPWATCH] as? StopwatchFragment)?.startStopWatch()
-    }
 }
