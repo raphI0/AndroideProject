@@ -17,6 +17,10 @@ class Config(context: Context) : BaseConfig(context) {
         fun newInstance(context: Context) = Config(context)
     }
 
+    var isEnigmaEnabled: Boolean
+        get() = prefs.getBoolean("is_enigma_enabled", false)
+        set(isEnigmaEnabled) = prefs.edit().putBoolean("is_enigma_enabled", isEnigmaEnabled).apply()
+
     var selectedTimeZones: Set<String>
         get() = prefs.getStringSet(SELECTED_TIME_ZONES, HashSet())!!
         set(selectedTimeZones) = prefs.edit().putStringSet(SELECTED_TIME_ZONES, selectedTimeZones).apply()

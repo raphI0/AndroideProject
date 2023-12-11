@@ -25,6 +25,7 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
     private val COL_LABEL = "label"
     private val COL_ONE_SHOT = "one_shot"
 
+
     private val mDb = writableDatabase
 
     companion object {
@@ -131,6 +132,7 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
                         val soundUri = cursor.getStringValue(COL_SOUND_URI)
                         val label = cursor.getStringValue(COL_LABEL)
                         val oneShot = cursor.getIntValue(COL_ONE_SHOT) == 1
+
 
                         val alarm = Alarm(id, timeInMinutes, days, isEnabled, vibrate, soundTitle, soundUri, label, oneShot)
                         alarms.add(alarm)

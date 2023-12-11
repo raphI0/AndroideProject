@@ -8,9 +8,12 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.os.*
 import android.provider.AlarmClock
+import android.view.Display
 import android.view.MotionEvent
+import android.view.View
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
+import android.widget.Button
 import com.simplemobiletools.clock.R
 import com.simplemobiletools.clock.databinding.ActivityReminderBinding
 import com.simplemobiletools.clock.extensions.*
@@ -20,6 +23,8 @@ import com.simplemobiletools.clock.helpers.getPassedSeconds
 import com.simplemobiletools.clock.models.Alarm
 import com.simplemobiletools.commons.extensions.*
 import com.simplemobiletools.commons.helpers.*
+import kotlin.random.Random
+
 
 class ReminderActivity : SimpleActivity() {
     companion object {
@@ -42,6 +47,8 @@ class ReminderActivity : SimpleActivity() {
     private var dragDownX = 0f
     private val binding: ActivityReminderBinding by viewBinding(ActivityReminderBinding::inflate)
     private var finished = false
+    private var isEnigmaSolved = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         isMaterialActivity = true
@@ -108,6 +115,11 @@ class ReminderActivity : SimpleActivity() {
             initialDraggableX = binding.reminderDraggable.left.toFloat()
         }
 
+        if(!config.isEnigmaEnabled)
+            isEnigmaSolved = true
+        else if (config.isEnigmaEnabled)
+            triggerEnigma()
+
         binding.reminderDraggable.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -118,6 +130,13 @@ class ReminderActivity : SimpleActivity() {
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     dragDownX = 0f
                     if (!didVibrate) {
+                        if (isEnigmaSolved) {
+                            binding.reminderDraggable.performHapticFeedback()
+                            didVibrate = true
+                            finishActivity()
+                        } else {
+                            // L'énigme n'est pas résolue, effectuez des actions supplémentaires si nécessaire
+                        }
                         binding.reminderDraggable.animate().x(initialDraggableX).withEndAction {
                             binding.reminderDraggableBackground.animate().alpha(0.2f)
                         }
@@ -131,31 +150,50 @@ class ReminderActivity : SimpleActivity() {
                 }
 
                 MotionEvent.ACTION_MOVE -> {
-                    binding.reminderDraggable.x = Math.min(maxDragX, Math.max(minDragX, event.rawX - dragDownX))
-                    if (binding.reminderDraggable.x >= maxDragX - 50f) {
-                        if (!didVibrate) {
-                            binding.reminderDraggable.performHapticFeedback()
-                            didVibrate = true
-                            finishActivity()
+                    if (isEnigmaSolved) {
+                        binding.reminderDraggable.x = Math.min(maxDragX, Math.max(minDragX, event.rawX - dragDownX))
+                        if (binding.reminderDraggable.x >= maxDragX - 50f) {
+                            // Logique de snooze normale ici...
                         }
-
-                        if (isOreoPlus()) {
-                            notificationManager.cancelAll()
-                        }
-                    } else if (binding.reminderDraggable.x <= minDragX + 50f) {
-                        if (!didVibrate) {
-                            binding.reminderDraggable.performHapticFeedback()
-                            didVibrate = true
-                            snoozeAlarm()
-                        }
-
-                        if (isOreoPlus()) {
-                            notificationManager.cancelAll()
-                        }
+                    } else {
+                        // L'énigme n'est pas résolue, ne pas permettre le snoozing
+                        // Vous pouvez effectuer des actions supplémentaires ici, comme afficher un message à l'utilisateur
                     }
                 }
             }
             true
+        }
+    }
+
+    private fun triggerEnigma() {
+        val enigmaButton = findViewById<Button>(R.id.enigmaButton)  // Remplacez par l'ID ou la référence réelle de votre élément
+        enigmaButton.visibility = View.VISIBLE
+
+        fun moveButtonPeriodically() {
+            val handler = Handler(Looper.getMainLooper())
+            handler.postDelayed(object : Runnable {
+                override fun run() {
+                    if (!isEnigmaSolved) {
+                        // Génère une position aléatoire
+                        val randomX = Random.nextInt(-500, 500) // Ajustez la plage selon vos besoins
+                        val randomY = Random.nextInt(-800, 800) // Ajustez la plage selon vos besoins
+
+                        // Déplace le bouton vers la position aléatoire
+                        enigmaButton.animate().translationX(randomX.toFloat()).translationY(randomY.toFloat()).start()
+
+                        // Répète l'opération toutes les 200 ms
+                        handler.postDelayed(this, 800)
+                    }
+                }
+            }, 200)
+        }
+        moveButtonPeriodically()
+
+        enigmaButton.setOnClickListener {
+            // L'utilisateur a trouvé le bouton, résoudre l'énigme
+            isEnigmaSolved = true
+            enigmaButton.visibility = View.GONE
+            // Vous pouvez également effectuer d'autres actions ici, comme afficher un message de confirmation
         }
     }
 
@@ -187,6 +225,7 @@ class ReminderActivity : SimpleActivity() {
             alarm!!.soundUri
         } else {
             config.timerSoundUri
+
         }
 
         if (soundUri != SILENT) {

@@ -1,10 +1,12 @@
 package com.simplemobiletools.clock.dialogs
 
 import android.app.TimePickerDialog
+import android.content.Context
 import android.graphics.drawable.Drawable
 import android.media.AudioManager
 import android.media.RingtoneManager
 import android.text.format.DateFormat
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -21,11 +23,17 @@ import com.simplemobiletools.clock.models.Alarm
 import com.simplemobiletools.commons.dialogs.ConfirmationDialog
 import com.simplemobiletools.commons.dialogs.SelectAlarmSoundDialog
 import com.simplemobiletools.commons.extensions.*
+import com.simplemobiletools.commons.helpers.*
 import com.simplemobiletools.commons.models.AlarmSound
+
+import android.os.*
+
+
 
 class EditAlarmDialog(val activity: SimpleActivity, val alarm: Alarm, val onDismiss: () -> Unit = {}, val callback: (alarmId: Int) -> Unit) {
     private val binding = DialogEditAlarmBinding.inflate(activity.layoutInflater)
     private val textColor = activity.getProperTextColor()
+
 
     init {
         restoreLastAlarm()
@@ -122,7 +130,15 @@ class EditAlarmDialog(val activity: SimpleActivity, val alarm: Alarm, val onDism
                     checkDaylessAlarm()
                 }
 
+
+
                 editAlarmDaysHolder.addView(day)
+
+                editAlarmEnigma.isChecked = activity.config.isEnigmaEnabled
+                editAlarmEnigmaHolder.setOnClickListener {
+                    editAlarmEnigma.toggle()
+                    activity.config.isEnigmaEnabled = editAlarmEnigma.isChecked
+                }
             }
         }
 

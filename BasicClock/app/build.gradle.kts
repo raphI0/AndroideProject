@@ -19,6 +19,8 @@ base {
     archivesName.set("clock")
 }
 
+
+
 android {
     compileSdk = project.libs.versions.app.build.compileSDKVersion.get().toInt()
 

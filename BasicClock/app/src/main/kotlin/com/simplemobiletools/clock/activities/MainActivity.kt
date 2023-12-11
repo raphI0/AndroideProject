@@ -216,8 +216,7 @@ class MainActivity : SimpleActivity() {
         val tabDrawables = arrayOf(
             com.simplemobiletools.commons.R.drawable.ic_clock_vector,
             R.drawable.ic_alarm_vector,
-            R.drawable.ic_stopwatch_vector,
-            R.drawable.ic_hourglass_vector
+            R.drawable.ic_stopwatch_filled_vector
         )
         val tabLabels = arrayOf(R.string.clock, com.simplemobiletools.commons.R.string.alarm, R.string.stopwatch, R.string.timer)
 
